@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery and AJAX</title>
+
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+    <script type="text/javascript">
+        $("document").ready(function() {
+            $("#getcontent").click(getContent);
+            $("#loadhtml").click(loadHTML);
+        });
+        
+        function getContent() {
+            $.ajax("sampletextcontent.txt", 
+                   { success: setContent, type: "GET", dataType: "text" });
+        }
+        
+        function setContent(data, status, jqxhr) {
+            $("#example").text(data);
+        }
+        
+        function loadHTML() {
+            $("#example").load("samplehtml.html");
+        }
+    </script>
+</head>
+<body>
+    <h1>AJAX and jQuery</h1>
+    <p>This is  a sample AJAX request process. A sample of how you can use jQuery and Ajax to load HTML or text into a div on your page's code.</p>
+    <ul>
+        <li><code>ajax()</code>: used to perform generic AJAX requests</li>
+        <li><code>load()</code>: loads AJAX content directly into a page element</li>
+    </ul>
+    <div id="example">
+    </div>
+    <button id="getcontent">Get Text</button>
+    <button id="loadhtml">Load HTML</button>
+</body>
+</html>
