@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
     <title>jQuery and AJAX</title>
     <!-- Using Git -->
+	
+	 <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css"/>
+	
     <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	
+	<script src="js/handlebars-v4.0.5.js"></script>
+	
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	
+
     <script type="text/javascript">
         $("document").ready(function() {
             $("#getcontent").click(getContent);
@@ -12,7 +34,7 @@
         });
         
         function getContent() {
-            $.ajax("sampletextcontent.txt", 
+            $.ajax("assets/sampletextcontent.txt", 
                    { success: setContent, type: "GET", dataType: "text" });
         }
         
@@ -21,12 +43,19 @@
         }
         
         function loadHTML() {
-            $("#example").load("samplehtml.html");
+            $("#example").load("assets/samplehtml.html");
         }
     </script>
+	
 </head>
 <body>
-    <h1>AJAX and jQuery</h1>
+	
+	  <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+	
+	   <h1>AJAX and jQuery</h1>
     <p>This is  a sample AJAX request process. A sample of how you can use jQuery and Ajax to load HTML or text into a div on your page's code.</p>
     <ul>
         <li><code>ajax()</code>: used to perform generic AJAX requests</li>
@@ -36,5 +65,174 @@
     </div>
     <button id="getcontent">Get Text</button>
     <button id="loadhtml">Load HTML</button>
+	
+					
+					             </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+	
+	
+	<section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h2>Angular JS</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col">
+
+<!-- People List  -->
+<nav class="product-nav">
+    <ul>
+        <li class="btn btn-dark"><a class="current" href="#1">Construction Products</a></li>
+        <li class="btn btn-dark"><a  href="#0">Pool Products</a></li>
+        <li class="btn btn-dark"><a  href="#2">Shipping Products</a></li>
+    </ul>
+</nav>
+
+<div id="product_list">
+<script id="people-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="col-md-4">
+        {{#if mainImg}}
+        <p><img src="{{mainImg}}"/></p>
+        {{/if}}
+        <h3>{{fullname name}}</h3>
+    </div>
+    {{/each}}
+</script>
+</div>
+
+         </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+	
+	
+	
+	<!-- Angular JS Script -->
+<script type="text/javascript">
+(function() {
+    var container = $('#product_list'),
+        nav = $('nav a'),
+
+        people = [
+            // Pool Cover
+            [{
+                mainImg: 'img/pool_1.jpg' ,
+                name: {
+                    first: 'Pool',
+                    last: 'Cover-#3900'
+                },
+            },
+            {
+                mainImg: 'img/pool_2.jpg' ,
+                name: {
+                       first: 'Pool',
+                    last: 'Cover-#8090'
+                },
+            },
+            {
+                    mainImg: 'img/pool_3.jpg',
+                    name: {
+                          first: 'Pool',
+                    last: 'Cover-#4435'
+                },
+            }],
+			
+            // Construction Products
+            [{
+				mainImg: 'img/construction_1.jpg',
+                name: {
+                    first: 'Canvas',
+                    last: 'Tarp-#5003'
+                },
+            },
+			{
+				mainImg: 'img/winter_enclosure_2.jpg',
+                name: {
+                    first: 'Glass',
+                    last: 'Winter Enclosure-#0003'
+                },
+            },
+			{
+				mainImg: 'img/winter_enclosure.jpg',
+                name: {
+                    first: 'Plastic',
+                    last: 'winter Enclosure-#3003'
+                },
+            },
+			
+            {
+				mainImg: 'img/construction_2.jpg',
+                name: {
+                    first: 'Concrete ',
+                    last: 'Curing Blanket-#2090'
+                },
+            }],
+			
+            // Shippiing Products
+            [{
+				mainImg: 'img/bubblewrap.jpg',
+                name: {
+                    first: 'Bubble',
+                    last: 'Wrap-#0099'
+                },
+            },
+			 {
+				mainImg: 'img/sheet_despenser.jpg',
+                name: {
+                    first: 'Sheet',
+                    last: 'Despenser-#8988'
+                },
+			 },
+			{
+				mainImg: 'img/polyethylenesheets.JPG',
+                name: {
+                    first: 'Polyethylene',
+                    last: 'Sheets-#8588'
+                },
+			},
+            {
+				mainImg: 'img/protective_pouches.jpg',
+                name: {
+                    first: 'Protective',
+                    last: 'Pouches-#9988'
+                },
+            }]
+        ],
+        template = Handlebars.compile($('#people-template').html());
+
+    Handlebars.registerHelper('fullname', function(person) {
+        return person.first + ' ' + person.last;
+    });
+
+    Handlebars.compile($('#people-template').html());
+
+
+    container.append(template(people[0]));
+
+    nav.on('click', function(e) {
+        e.preventDefault();
+        nav.removeClass();
+        var hash = this.hash.replace(/^#/, '');
+        container.html('');
+        container.append(template(people[hash]));
+        $(this).addClass('current');
+    });
+})();
+</script>
+
+	
+	
 </body>
 </html>
